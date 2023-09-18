@@ -6,6 +6,8 @@ El algoritmo utilizado para ordenar los libros por orden alfabético ascendente 
 # SICT0301B: Evalúa los componentes
 ## Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes
 Función sortBooks(Introsort): 0(log(n)), ya que no es necesario comparar cada par de títulos; divide y compara los elementos del vector de manera recursiva.
+Opción agregar libro: 0(n), puesto que solo puede agregar un elemento a la vez.
+Opción eliminar libro: 0(n), debido al mismo motivo que la opción anterior.
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
 El programa tiene la opción de mostrar un vector de libros ordenado (opción 1), agregar un libro al vector (opción 2), o eliminarlo del almacenamiento (opción 3).
