@@ -35,7 +35,7 @@ int main() {
             for ( auto& element : books ) {
                 cout << element << "  ";
             }
-            cout << "\nEscriba la posición del libro que desea eliminar: " << endl;
+            cout << "\nEscriba la posición del libro que desea eliminar (contando desde el 0): " << endl;
             cin >> viejoIndice;
             books.erase(books.begin() + viejoIndice);
             for ( auto& element : books ) {
