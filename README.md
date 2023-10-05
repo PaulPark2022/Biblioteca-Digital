@@ -11,8 +11,11 @@ El algoritmo utilizado para ordenar los libros por orden alfabético ascendente 
 ordenamiento con merge sort: 0(n log(n)), puesto que divide la lista en mitades de manera recursiva para después combinarlas de nuevo una por una.
 ### lista de libros
 Función para agregar libro: 0(1), puesto que el sistema ya tiene la posición predeterminada.
+
 Función para eliminar libro: 0(1), debido al mismo motivo que la opción anterior.
+
 Función para buscar libro: 0(n), porque recorre los elementos de la lista uno por uno.
+
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
 El programa tiene la opción de buscar libros por su título directamente de la lista doblemente ligada que actúa como almacenamiento de la biblioteca.
