@@ -16,5 +16,7 @@ std::vector<string> Functions::sortBooks(std::vector<string> &bookList){
    return bookList;
 };
 
+// Posible idea para usar BST: Almacenar los números de serie de los libros para definir cuáles serán transferidos
+
 #endif /* FUNCTIONS_H_ */
 
