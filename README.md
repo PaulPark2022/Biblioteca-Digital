@@ -1,13 +1,18 @@
 # Biblioteca-Digital
-Este proyecto simula el comportamiento de una plataforma de biblioteca digital con un menú que ejecuta una de estas 3 funciones: Ordenar una lista de libros alfabéticamente por su título, agregar un libro y quitarlo del almacenamiento.
+Este proyecto simula el comportamiento de una plataforma de biblioteca digital con un menú que ejecuta una de estas 4 funciones: Ordenar una lista de libros alfabéticamente por su título, buscar un libro por su nombre, agregar uno nuevo y quitar uno existente del almacenamiento.
 # SICT0302B: Toma decisiones
+## Selecciona y usa una estructura lineal adecuada al problema
+La estructura lineal seleccionada es una lista doblemente ligada, ya que, a diferencia de un vector, su tamaño aumenta y disminuye durante la ejecución de las funciones de inserción y eliminación de elementos, de modo que no requiere un tamaño inicial definido y no se desperdicia memoria. La ventaja de que sea doblemente ligada es que considera apuntadores para la cola y el elemento anterior, lo cual resulta en menor probabilidad de errores durante la ejecución del código. Si bien la memoria total que ocupa es mayor a la de un vector, la implementación de sus funciones es más sencilla y limpia en comparación. Además, dado que contiene un sistema de búsqueda, no se recomienda el acceso aleatorio.
 ## Selecciona un algoritmo de ordenamiento adecuado al problema
-El algoritmo utilizado para ordenar los libros por orden alfabético ascendente es la función sort de la librería estándar de C++; un introsort. El motivo de esta selección es debido a sus propiedades como algoritmo de ordenamiento híbrido (quick sort, heap sort e insertion sort), las cuales le otorgan una alta velocidad y un menor riesgo de terminar en el peor caso (tiempo y espacio) de entre sus tres subalgoritmos (0(n^2) del quicksort). Se encuentra en la función sortBooks de las líneas 11 y 15 en el archivo functions.h.
+El algoritmo utilizado para ordenar los libros por orden alfabético ascendente es un merge sort (originalmente iba a ser el introsort de la librería estándar de C++, pero la idea fue descartada porque únicamente funcionaba con iteradores de acceso aleatorio, lo cual no concuerda con los apuntadores de una lista doblemente ligada), pues es uno de los algoritmos de ordenamiento más consistentes (su rendimiento es 0 (n log(n)) para los casos peor, promedio y mejor) y su método de división es compatible con el comportamiento de los apuntadores de una lista doblemente ligada.
 # SICT0301B: Evalúa los componentes
 ## Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes
-Función sortBooks(Introsort): 0(log(n)), ya que no es necesario comparar cada par de títulos; divide y compara los elementos del vector de manera recursiva.
-Opción agregar libro: 0(n), puesto que solo puede agregar un elemento a la vez.
-Opción eliminar libro: 0(n), debido al mismo motivo que la opción anterior.
+### ordenamiento de libros
+ordenamiento con merge sort: 0(n log(n)), puesto que divide la lista en mitades de manera recursiva para después combinarlas de nuevo una por una.
+### lista de libros
+Función para agregar libro: 0(1), puesto que el sistema ya tiene la posición predeterminada.
+Función para eliminar libro: 0(1), debido al mismo motivo que la opción anterior.
+Función para buscar libro: 0(n), porque recorre los elementos de la lista uno por uno.
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
-El programa tiene la opción de mostrar un vector de libros ordenado (opción 1), agregar un libro al vector (opción 2), o eliminarlo del almacenamiento (opción 3).
+El programa tiene la opción de buscar libros por su título directamente de la lista doblemente ligada que actúa como almacenamiento de la biblioteca.
