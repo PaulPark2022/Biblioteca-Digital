@@ -6,6 +6,13 @@ La estructura lineal seleccionada es una lista doblemente ligada, ya que, a dife
 ## Selecciona un algoritmo de ordenamiento adecuado al problema
 El algoritmo utilizado para ordenar los libros por orden alfabético ascendente es un merge sort (originalmente iba a ser el introsort de la librería estándar de C++, pero la idea fue descartada porque únicamente funcionaba con iteradores de acceso aleatorio, lo cual no concuerda con los apuntadores de una lista doblemente ligada), pues es uno de los algoritmos de ordenamiento más consistentes (su rendimiento es 0 (n log(n)) para los casos peor, promedio y mejor) y su método de división es compatible con el comportamiento de los apuntadores de una lista doblemente ligada.
 # SICT0301B: Evalúa los componentes
+## Presenta Casos de Prueba correctos y completos para todas las funciones y procedimientos del programa
+Los casos de pruebas para todas las funciones se encuentran en el archivo pruebas.cpp donde se prueban las funciones de:
+
+la lista doblemente ligada de libros
+
+el merge sort de la lista doblemente ligada de libros
+
 ## Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes
 ### ordenamiento de libros
 ordenamiento con merge sort: 0(n log(n)), puesto que divide la lista en mitades de manera recursiva para después combinarlas de nuevo una por una.
