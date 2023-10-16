@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
 using namespace std;
 
 class Node {
@@ -28,12 +27,13 @@ public:
 	Functions();
 	void push(const std::string&);
 	std::string printList();
-	void split(Node*, Node**, Node**);
-	Node* merge(Node*, Node*);
 	void mergeSort();
 	int search(const std::string&);
-	bool deleteNode(const std::string&);
+	bool deleteBook(const std::string&);
 private:
+    void split(Node*, Node**, Node**);
+	Node* merge(Node*, Node*);
+	
     Node* head;
     Node* tail;
 };
@@ -52,8 +52,8 @@ void Functions::push(const std::string& value) {
 }
 
 std::string Functions::printList() {
-        std::stringstream aux;   
-        if (head == 0) {
+        std::stringstream aux;  
+        if (head == nullptr) {
             return "NULL";
         }
         Node* current = head;
@@ -86,14 +86,14 @@ void Functions::split(Node* source, Node** left, Node** right) {
     }
 
 Node* Functions::merge(Node* left, Node* right) {
-        if (left == 0) {
+        if (left == nullptr) {
             return right;
         }
-        if (right == 0) {
+        if (right == nullptr) {
             return left;
         }
         
-         Node* result = 0;
+         Node* result = nullptr;
         if (left->data <= right->data) {
             result = left;
             result->next = merge(left->next, right);
@@ -107,7 +107,7 @@ Node* Functions::merge(Node* left, Node* right) {
     }
 
 void Functions::mergeSort() {
-        if (head == 0 || head->next == 0) {
+        if (head == nullptr || head->next == nullptr) {
             return;
         }
 
@@ -127,25 +127,25 @@ void Functions::mergeSort() {
 
         head = merge(leftList.head, rightList.head);
         tail = rightList.tail;
-
 }
 
 int Functions::search(const std::string& value) {
         Node* current = head;
         int index = 0;
 
-        while (current != 0) {
+        while (current != nullptr) {
             if (current->data == value) {
                 return index; 
+            }
             current = current->next;
             index++;
         }
         return -1; 
     }
     
-bool Functions::deleteNode(const std::string& value) {
+bool Functions::deleteBook(const std::string& value) {
         Node* current = head;
-        while (current != 0) {
+        while (current != nullptr) {
             if (current->data == value) {
                 if (current->prev) {
                     current->prev->next = current->next;
@@ -165,4 +165,5 @@ bool Functions::deleteNode(const std::string& value) {
         }
         return false; 
     }
+
 #endif /* FUNCTIONS_H_ */
