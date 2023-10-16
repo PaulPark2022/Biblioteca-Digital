@@ -13,14 +13,9 @@ private:
     friend class Functions;
 public:    
     Node(const std::string&);
-    std::string getData() const;
 };
 
 Node::Node(const std::string& value) : data(value), prev(0), next(0) {}
-
-std::string Node::getData() const {
-    return data;
-}
 
 class Functions {
 public:
