@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     Functions list;
     int numLibros, op;
-
+    
     while (true) {
         cout << "\tBienvenido a la Biblioteca Digital" << endl;
         cout << "¿Cuál es la operación que desea realizar?" << endl;
@@ -34,11 +34,7 @@ int main() {
                 }
 
                 std::string listaLibros = list.printList();
-                if (listaLibros == "NULL") {
-                    std::cout << "No tenemos libros por el momento" << endl;
-                } else {
-                    std::cout << "La lista de libros disponibles es la siguiente: " << listaLibros << endl;
-                }
+                std::cout << "La lista de libros disponibles es la siguiente: " << listaLibros << endl;
                 break;
             }
             
@@ -58,9 +54,9 @@ int main() {
                 std::cout << "Escriba el título del libro que desea buscar: ";
                 std::getline(std::cin, libroBuscado);
 
-                Node* libroEncontrado = list.search(libroBuscado);
-                if (libroEncontrado) {
-                    std::cout << "Libro encontrado: " << libroEncontrado->getData() << std::endl;
+                int indiceLibro = list.search(libroBuscado);
+                if (indiceLibro != -1) {
+                    std::cout << "Libro encontrado en el indice: " << indiceLibro << std::endl;
                 } else {
                     std::cout << "El libro no se encuentra en este espacio" << std::endl;
                 }
@@ -83,7 +79,7 @@ int main() {
                 std::cout << "Ingrese el nombre del libro que desea eliminar: ";
                 std::getline(std::cin, libroAEliminar);
 
-                if (list.deleteNode(libroAEliminar)) {
+                if (list.deleteBook(libroAEliminar)) {
                     std::cout << "Libro eliminado." << std::endl;
                 } else {
                     std::cout << "No puedes eliminar un libro que no existe." << std::endl;
@@ -101,4 +97,4 @@ int main() {
         }
     }
     return 0;
-}      
+}        
