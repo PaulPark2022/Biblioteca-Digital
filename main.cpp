@@ -78,17 +78,6 @@ int main() {
             }
             
             case 5: {
-                list.mergeSort();
-                std::string listaLibros = list.reversePrintList();
-                if (listaLibros == "NULL") {
-                    std::cout << "No tenemos libros por el momento" << endl;
-                } else {
-                    std::cout << "Estos son los libros que tenemos disponibles: " << listaLibros << std::endl;
-                }
-                break;
-            }
-            
-            case 6: {
                 std::string listaLibros = list.printList();
                 std::string libroAEliminar;
                 std::cout << "Ingrese el nombre del libro que desea eliminar: ";
@@ -102,7 +91,7 @@ int main() {
                 break;
             }
             
-            case 7:
+            case 6:
                 std::cout << "Gracias por utilizar nuestro servicio" << std::endl;
                 return 0;
 
