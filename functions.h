@@ -67,22 +67,6 @@ std::string Functions::printList() {
         return aux.str();
     }
 
-std::string Functions::reversePrintList() {
-        std::stringstream aux;   
-        if (tail == 0) {
-            return "NULL";
-        }
-        Node* current = tail;
-        while (current != 0) {
-            aux << current->data;
-            if (current->prev != 0) {
-                aux << ", ";
-            }
-            current = current->prev;
-        }
-        return aux.str();
-    }
-
 void Functions::split(Node* source, Node** left, Node** right) {
         Node* slow = source;
         Node* fast = source->next;
@@ -94,7 +78,6 @@ void Functions::split(Node* source, Node** left, Node** right) {
                 fast = fast->next;
             }
         }
-
         *left = source;
         *right = slow->next;
         slow->next = 0;
@@ -102,14 +85,13 @@ void Functions::split(Node* source, Node** left, Node** right) {
     }
 
 Node* Functions::merge(Node* left, Node* right) {
-        if (left == nullptr) {
+        if (left == 0) {
             return right;
         }
-        if (right == nullptr) {
+        if (right == 0) {
             return left;
         }
-        
-         Node* result = nullptr;
+        Node* result = 0;
         if (left->data <= right->data) {
             result = left;
             result->next = merge(left->next, right);
@@ -123,7 +105,7 @@ Node* Functions::merge(Node* left, Node* right) {
     }
 
 void Functions::mergeSort() {
-        if (head == nullptr || head->next == nullptr) {
+        if (head == 0 || head->next == 0) {
             return;
         }
 
@@ -143,7 +125,6 @@ void Functions::mergeSort() {
 
         head = merge(leftList.head, rightList.head);
         tail = rightList.tail;
-
 }
 
 Node* Functions::search(const std::string& value) {
@@ -172,7 +153,6 @@ bool Functions::deleteNode(const std::string& value) {
                 } else {
                     tail = current->prev;
                 }
-                
                 delete current;
                 return true;
             }
