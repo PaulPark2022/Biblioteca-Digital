@@ -3,14 +3,14 @@
 #include <string>
 #include <sstream>
 #include "avl.h"
-#include "stack.h"
+#include "queue.h"
 #include "merge.h"
 
 using namespace std;
 
 int main() {
     AVL<int> avlLibros;
-    StackVector<int> stackLibros(10);
+    QueueVector<int> queueLibros(10);
     Merge<int> mergeLibros;
     int nSerialLibro, numLibros, op;
     std::vector<int> vectorLibros;
@@ -193,4 +193,4 @@ int main() {
         }
     }
     return 0;
-}        
+}   
