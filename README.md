@@ -21,3 +21,7 @@ Función para buscar libro: 0(n), porque recorre los elementos de la lista uno p
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
 El programa tiene la opción de buscar un libro (opción 3 en el menú) en el archivo txt o una serie de libros por medio de su número de serie en el AVL (opción 4 en el menú). También despliega los libros disponibles en cualquier momento (opción 7 del menú).
+## Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa.
+Los libros están registrados en el archivo libros.txt de donde se leen al iniciar el programa. Cada línea contiene los siguientes elementos (en orden): Número de serie, título, autor y año.
+## Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa.
+Los libros agregadas se guardan en el archivo libros.txt, con la función add del AVL; los libros se eliminan del archivo con la función remove del AVL. El ofstream tiene la sección "std::ios::app" para que el archivo se actualice por cada vez que se realicen estas operaciones (no se reescriben libros).
