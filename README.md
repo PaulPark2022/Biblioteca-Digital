@@ -20,4 +20,4 @@ Función para buscar libro: 0(n), porque recorre los elementos de la lista uno p
 
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
-El programa tiene la opción de ordenar títulos de libros en la lista alfabéticamente (opción 2 en el menú), desplegando la lista ordenada inmediatamente después. También es capaz de buscar un título específico, desplegando su posición en la lista si llegara a existir (opción 3 en el menú). 
+El programa tiene la opción de buscar un libro (opción 3 en el menú) en el archivo txt o una serie de libros por medio de su número de serie en el AVL (opción 4 en el menú). También despliega los libros disponibles en cualquier momento (opción 7 del menú).
