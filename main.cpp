@@ -13,7 +13,7 @@ int main() {
     QueueVector<int> queueLibros(10);
     Merge<int> mergeLibros;
     int nSerialLibro, numLibros, op;
-    std::vector<int> vectorLibros;
+    std::vector<int> vectorLibros, vectorLibrosHallados;
     std::string titulo, autor, anio;
     
     std::string nombreArchivo = "libros.txt";
@@ -117,7 +117,6 @@ int main() {
                     std::string titulo, autor, anio;
                     
                     if (iss >> idLibro) {
-                // Read other details only if the serial number matches
                         std::getline(iss, titulo, ',');
                         std::getline(iss, autor, ',');
                         std::getline(iss, anio, ',');
@@ -136,34 +135,21 @@ int main() {
                 if (!libroEncontrado) {
                     std::cout << "Libro no encontrado." << std::endl;
                 }
-
                 
-                /*std::string libroBuscado;
-                std::cout << "Escriba el título del libro que desea buscar: ";
-                std::getline(std::cin, libroBuscado);
-
-                int indiceLibro = list.search(libroBuscado);
-                if (indiceLibro != -1) {
-                    std::cout << "Libro encontrado en el indice: " << indiceLibro << std::endl;
-                } else {
-                    std::cout << "El libro no se encuentra en este espacio" << std::endl;
-                }*/
                 archivoBiblioLecturaBuscar.close();
                 break;
             }
             
-            /*case 4: {
-                std::string listaLibros = list.printList();
-                if (listaLibros == "NULL") {
-                    std::cout << "No tenemos libros por el momento" << endl;
-                } else {
-                    std::cout << "Estos son los libros que tenemos disponibles: " << listaLibros << std::endl;
+            case 4: {
+                for (int i : vectorLibrosHallados) {
+                    
+                    avlLibros.add(i);
                 }
                 break;
             }
             
             case 5: {
-                std::string listaLibros = list.printList();
+                /*std::string listaLibros = list.printList();
                 std::string libroAEliminar;
                 std::cout << "Ingrese el nombre del libro que desea eliminar: ";
                 std::getline(std::cin, libroAEliminar);
@@ -172,9 +158,13 @@ int main() {
                     std::cout << "Libro eliminado." << std::endl;
                 } else {
                     std::cout << "No puedes eliminar un libro que no existe." << std::endl;
-                }
+                }*/
                 break;
-            }*/
+            }
+
+            case 6: {
+                
+            }
             
             case 7: {
                 std::cout << avlLibros.preorder() << std::endl;
