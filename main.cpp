@@ -9,7 +9,6 @@ using namespace std;
 
 int main() {
     AVL<int> avlLibros;
-    QueueVector<int> queueLibros(10);
     Merge<int> mergeLibros;
     int nSerialLibro, numLibros, op;
     std::vector<int> vectorLibros, vectorLibrosHallados;
