@@ -3,7 +3,6 @@
 #include <string>
 #include <sstream>
 #include "avl.h"
-#include "queue.h"
 #include "merge.h"
 
 using namespace std;
