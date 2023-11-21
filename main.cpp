@@ -1,184 +1,84 @@
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <sstream>
-#include "avl.h"
-#include "merge.h"
-
-using namespace std;
+#include <vector>
+#include <algorithm>
+#include <limits>
+#include "book.h"
+#include "node.h"
+#include "booklist.h"
 
 int main() {
-    AVL<int> avlLibros;
-    Merge<int> mergeLibros;
-    int nSerialLibro, numLibros, op;
-    std::vector<int> vectorLibros, vectorLibrosHallados;
-    std::string titulo, autor, anio;
-    
-    std::string nombreArchivo = "libros.txt";
-    
-    std::ifstream archivoBiblioLectura(nombreArchivo);
-    
-    if (!archivoBiblioLectura.is_open()) {
-        std::cerr << "Error; no se pudo abrir el archivo: " << "libros.txt" << std::endl;
-        return 1; 
-    }
-    
-    std::string libro;
-    while (getline (archivoBiblioLectura, libro)) {
-        std::istringstream iss(libro);
-        int idLibro;
-        if (iss >> idLibro) {
-            avlLibros.add(idLibro);
-        } else {
-            std::cerr << "Error al extraer el primer elemento como entero." << std::endl;
+    BookList bookList("books.txt");
+
+    bookList.readBooksFromFile("books.txt");
+
+    int choice;
+    do {
+        std::cout << "\nLibrary System Menu:\n";
+        std::cout << "1. Add Book\n";
+        std::cout << "2. Search Books\n";
+        std::cout << "3. Delete Book\n";
+        std::cout << "4. Show Books\n";
+        std::cout << "5. Exit\n";
+        std::cout << "Enter your choice (1-5): ";
+        std::cin >> choice;
+        if (std::cin.fail()) {
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << "Invalid input. Please enter a number.\n";
+            continue; 
         }
-    }
-    
-    archivoBiblioLectura.close();
-    
-    std::ofstream archivoBiblioEscritura(nombreArchivo, std::ios::app);
-    
-    if (!archivoBiblioEscritura.is_open()) {
-        std::cerr << "Error opening file for writing: " << nombreArchivo << std::endl;
-        return 1;
-    }
 
-    while (true) {
-        cout << "\tBienvenido a la Biblioteca Digital" << endl;
-        cout << "¿Cuál es la operación que desea realizar?" << endl;
-        cout << "1. Agregar libro" << endl;
-        cout << "2. Agregar serie de libros" << endl;
-        cout << "3. Buscar libro" << endl;
-        cout << "4. Buscar serie de libros" << endl;
-        cout << "5. Quitar libro" << endl;
-        cout << "6. Quitar serie de libros" << endl;
-        cout << "7. Mostrar libros" << endl;
-        cout << "8. Salir" << endl;
-        cin >> op;
-        std::cin.ignore(); 
-
-        switch(op){
+        switch (choice) {
             case 1: {
-                std::cout << "Escriba el número de serie del libro que desea agregar: ";
-                std::cin >> nSerialLibro;
-                std::cout << "Escriba el título del libro que desea agregar (sin espacios): ";
-                std::cin >> titulo;
-                std::cout << "Escriba el nombre del autor del libro que desea agregar (sin espacios): ";
-                std::cin >> autor;
-                std::cout << "Escriba el anio del libro que desea agregar: ";
-                std::cin >> anio;
-                archivoBiblioEscritura << nSerialLibro << "," << titulo << "," << autor << "," << anio << "\n";
+                int serialNumber, publicationYear;
+                std::string title, author;
+
+                std::cout << "Enter Book ID: ";
+                std::cin >> serialNumber;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                std::cout << "Enter Title: ";
+                std::getline(std::cin, title);
+
+                std::cout << "Enter Author: ";
+                std::getline(std::cin, author);
+
+                std::cout << "Enter Publication Year: ";
+                std::cin >> publicationYear;
+
+                Book newBook(serialNumber, title, author, publicationYear);
+                bookList.addBook(newBook);
                 break;
             }
-            
             case 2: {
-                std::cout << "Escriba el número de libros que desea agregar: ";
-                std::cin >> numLibros;
-                std::cin.ignore(); 
-                
-                for (int i = 0; i < numLibros; ++i) {
-                    std::cout << "Ingrese el número de serie del libro " << i + 1 << ": ";
-                    std::cin >> nSerialLibro;
-                    vectorLibros.push_back(nSerialLibro);
-                    std::cout << "Escriba el título del libro que desea agregar (sin espacios): ";
-                    std::cin >> titulo;
-                    std::cout << "Escriba el nombre del autor del libro que desea agregar (sin espacios): ";
-                    std::cin >> autor;
-                    std::cout << "Escriba el anio del libro que desea agregar: ";
-                    std::cin >> anio;
-                    archivoBiblioEscritura << nSerialLibro << "," << titulo << "," << autor << "," << anio << "\n";
-                }
-                
-                for (int i : vectorLibros) {
-                    avlLibros.add(i);
-                }
+                std::string searchTerm;
+                std::cout << "Enter the search term: ";
+                std::cin >> searchTerm;
+                bookList.searchBooks(searchTerm);
                 break;
             }
-        
             case 3: {
-                std::ifstream archivoBiblioLecturaBuscar(nombreArchivo);
-    
-                if (!archivoBiblioLecturaBuscar.is_open()) {
-                    std::cerr << "Error; no se pudo abrir el archivo: " << nombreArchivo << std::endl;
-                    return 1; 
-                }
-                
-                std::cout << "Escriba el número de serie del libro que desea buscar: ";
-                std::cin >> nSerialLibro;
-                
-                std::string libro;
-                bool libroEncontrado = false;
-                
-                while (std::getline (archivoBiblioLecturaBuscar, libro)) {
-                    std::istringstream iss(libro);
-                    int idLibro;
-                    std::string titulo, autor, anio;
-                    
-                    if (iss >> idLibro) {
-                        std::getline(iss, titulo, ',');
-                        std::getline(iss, autor, ',');
-                        std::getline(iss, anio, ',');
-
-                        if (idLibro == nSerialLibro) {
-                            std::cout << "Libro encontrado: " << titulo << std::endl;
-                            libroEncontrado = true;
-                            break;
-                        }
-                    }else {
-                        std::cerr << "Error al extraer el primer elemento como entero." << std::endl;
-                        iss.clear(); // Clear the fail state
-                    }
-                }
-
-                if (!libroEncontrado) {
-                    std::cout << "Libro no encontrado." << std::endl;
-                }
-                
-                archivoBiblioLecturaBuscar.close();
+                std::string searchTerm;
+                std::cout << "Enter the search term to delete: ";
+                std::cin >> searchTerm;
+                bookList.deleteBooks(searchTerm, "books.txt");
                 break;
             }
-            
             case 4: {
-                for (int i : vectorLibrosHallados) {
-                    
-                    avlLibros.add(i);
-                }
+                bookList.displayBooks();
                 break;
             }
-            
             case 5: {
-                /*std::string listaLibros = list.printList();
-                std::string libroAEliminar;
-                std::cout << "Ingrese el nombre del libro que desea eliminar: ";
-                std::getline(std::cin, libroAEliminar);
-
-                if (list.deleteBook(libroAEliminar)) {
-                    std::cout << "Libro eliminado." << std::endl;
-                } else {
-                    std::cout << "No puedes eliminar un libro que no existe." << std::endl;
-                }*/
+                std::cout << "Exiting the Library System. Thank you!\n";
                 break;
             }
-
-            case 6: {
-                
+            default: {
+                std::cout << "Invalid choice. Please enter a number between 1 and 5.\n";
             }
-            
-            case 7: {
-                std::cout << avlLibros.preorder() << std::endl;
-                break;
-            }
-            
-            case 8: {
-                std::cout << "Gracias por utilizar nuestro servicio" << std::endl;
-                archivoBiblioEscritura.close();
-                return 0;
-            }
-                
-            default:
-                std::cout << "Este número no es válido; seleccione otra opción" << std::endl;
-                break;
         }
-    }
+    } while (choice != 5);
+    
+    
     return 0;
-}   
+}
