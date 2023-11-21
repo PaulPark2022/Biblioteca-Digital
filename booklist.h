@@ -1,7 +1,7 @@
 #ifndef BOOKLIST_H
 #define BOOKLIST_H
 
-#include "node.h"
+#include "Node.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -10,47 +10,31 @@
 class BookList {
 private:
     Node* head;
-    std::string fileName;
-    
-    bool bookExists(int);
 
 public:
-    BookList(const std::string& fileName);
+    BookList();
     ~BookList();
-    void addBook(const Book& newBook);
+    void addBook(const Book& newBook, const std::string& fileName);
     void searchBooks(const std::string& searchTerm);
     void deleteBooks(const std::string& searchTerm, const std::string& fileName);
     void readBooksFromFile(const std::string& fileName);
     void displayBooks();
 };
 
-    BookList::BookList(const std::string& file) : head(nullptr), fileName(file) {}
-    
-    BookList::~BookList() {
-    Node* current = head;
-    while (current != nullptr) {
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
-    head = nullptr;
-}
-
-    void BookList::addBook(const Book& newBook) {
+    void BookList::addBook(const Book& newBook, const std::string& fileName) {
         Node* newNode = new Node(newBook);
         newNode->next = head;
         head = newNode;
-        
-        std::ofstream outputFile(fileName, std::ios::app);
 
-    if (outputFile.is_open()) {
-        outputFile << newBook.serialNumber << "," << newBook.title << ","
-                   << newBook.author << "," << newBook.publicationYear << "\n";
-        outputFile.close();
-    } else {
-        std::cerr << "Error opening file for writing: " << fileName << std::endl;
+        std::ofstream outputFile(fileName, std::ios::app);
+        if (outputFile.is_open()) {
+            outputFile << newBook.serialNumber << "," << newBook.title << ","
+                       << newBook.author << "," << newBook.publicationYear << "\n";
+            outputFile.close();
+        } else {
+            std::cerr << "Error opening file for writing: " << fileName << std::endl;
+        }
     }
-}
 
     void BookList::searchBooks(const std::string& searchTerm) {
         Node* current = head;
@@ -82,7 +66,9 @@ public:
                     prev->next = current->next;
                 }
 
+
                 bookVector.push_back(current->data);
+
 
                 delete current;
                 current = prev; 
@@ -108,17 +94,14 @@ public:
 
     void BookList::readBooksFromFile(const std::string& fileName) {
         std::ifstream inputFile(fileName);
-    if (inputFile.is_open()) {
-        int serialNumber, publicationYear;
-        std::string title, author;
+        if (inputFile.is_open()) {
+            int serialNumber, publicationYear;
+            std::string title, author;
 
-        while (inputFile >> serialNumber >> std::ws && std::getline(inputFile, title, ',') &&
-               std::getline(inputFile, author, ',') && inputFile >> publicationYear) {
-            // Check if the book with the same serial number already exists
-            if (!bookExists(serialNumber)) {
-                addBook(Book(serialNumber, title, author, publicationYear));
+            while (inputFile >> serialNumber >> std::ws && std::getline(inputFile, title, ',') &&
+                   std::getline(inputFile, author, ',') && inputFile >> publicationYear) {
+                addBook(Book(serialNumber, title, author, publicationYear), fileName);
             }
-        }
 
             inputFile.close();
         } else {
@@ -143,15 +126,4 @@ public:
                       << ", Author: " << book.author << ", Year: " << book.publicationYear << "\n";
         }
     }
-    
-    bool BookList::bookExists(int serialNumber) {
-    Node* current = head;
-    while (current != nullptr) {
-        if (current->data.serialNumber == serialNumber) {
-            return true; // Book already exists
-        }
-        current = current->next;
-    }
-    return false; // Book does not exist
-}
 #endif
