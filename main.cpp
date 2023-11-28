@@ -1,84 +1,102 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <algorithm>
-#include <limits>
-#include "book.h"
-#include "node.h"
-#include "booklist.h"
+#include <string>
+#include <sstream>
+#include "queue.h"
+#include "functions.h"
+
+using namespace std;
 
 int main() {
-    BookList bookList("books.txt");
+    QueueList<int> serials;
+    QueueList<std::string> titulos;
+    QueueList<std::string> autores;
+    QueueList<int> anios;
+    Functions functions(serials, titulos, autores, anios);
+    
+    readFromFile(serials, titulos, autores, anios);
+    
+    ofstream archivoBiblio("libros.txt", std::ios::app);
+    
+    if (!archivoBiblio.is_open()) {
+        std::cerr << "Error, no se pudo abrir el archivo: " << "libros.txt" << std::endl;
+        return 1;
+    }
 
-    bookList.readBooksFromFile("books.txt");
-
-    int choice;
+    int opcion;
     do {
-        std::cout << "\nLibrary System Menu:\n";
-        std::cout << "1. Add Book\n";
-        std::cout << "2. Search Books\n";
-        std::cout << "3. Delete Book\n";
-        std::cout << "4. Show Books\n";
-        std::cout << "5. Exit\n";
-        std::cout << "Enter your choice (1-5): ";
-        std::cin >> choice;
-        if (std::cin.fail()) {
-            std::cin.clear(); 
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-            std::cout << "Invalid input. Please enter a number.\n";
-            continue; 
-        }
+        std::cout << "\tBienvenido(a) a la Biblioteca TEC" << endl;;
+        std::cout << "Seleccione la operación que desee realizar: " << endl;
+        std::cout << "1. Agregar libro(s)\n";
+        std::cout << "2. Buscar libro(s)\n";
+        std::cout << "3. Quitar libro(s)\n";
+        std::cout << "4. Mostrar libros disponibles\n";
+        std::cout << "5. Salir\n";
+        std::cin >> opcion;
 
-        switch (choice) {
+        switch (opcion) {
             case 1: {
-                int serialNumber, publicationYear;
-                std::string title, author;
-
-                std::cout << "Enter Book ID: ";
-                std::cin >> serialNumber;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                std::cout << "Enter Title: ";
-                std::getline(std::cin, title);
-
-                std::cout << "Enter Author: ";
-                std::getline(std::cin, author);
-
-                std::cout << "Enter Publication Year: ";
-                std::cin >> publicationYear;
-
-                Book newBook(serialNumber, title, author, publicationYear);
-                bookList.addBook(newBook);
+                functions.addBooks(archivoBiblio);
                 break;
             }
             case 2: {
-                std::string searchTerm;
-                std::cout << "Enter the search term: ";
-                std::cin >> searchTerm;
-                bookList.searchBooks(searchTerm);
+                int opcionBusqueda = 1;
+                std::string terminoBusqueda;
+    
+                while (opcionBusqueda == 1) {
+                    std::cout << "Escriba el tipo de término que desee buscar: " << endl;
+                    std::cout << "NSerial, Autor, Titulo, Anio" << endl;
+                    std::cin >> terminoBusqueda;
+
+                    if (terminoBusqueda == "NSerial") {
+                        int nSerial;
+                        std::cout << "Escriba el número de serie del libro: ";
+                        std::cin >> nSerial;
+                        functions.searchBooks(std::to_string(nSerial), "nSerial");
+                    } else if (terminoBusqueda == "Autor") {
+                        std::string autor;
+                        std::cout << "Escriba el nombre del autor del libro (sin espacios): ";
+                        std::cin >> autor;
+                        functions.searchBooks(autor, "autor");
+                    } else if (terminoBusqueda == "Titulo") {
+                        std::string titulo;
+                        std::cout << "Escriba el titulo del libro (sin espacios): ";
+                        std::cin >> titulo;
+                        functions.searchBooks(titulo, "titulo");
+                    } else if (terminoBusqueda == "Anio") {
+                        int anio;
+                        std::cout << "Escriba el anio del libro: ";
+                        std::cin >> anio;
+                        functions.searchBooks(std::to_string(anio), "anio");
+                    } else {
+                        std::cout << "Término inválido" << std::endl;
+                    }
+
+                    std::cout << "¿Desea realizar otra búsqueda? (1: Sí, 0: No): ";
+                    std::cin >> opcionBusqueda;
+                }   
                 break;
             }
             case 3: {
-                std::string searchTerm;
-                std::cout << "Enter the search term to delete: ";
-                std::cin >> searchTerm;
-                bookList.deleteBooks(searchTerm, "books.txt");
+                std::string terminoBusqueda;
+                std::cout << "Escriba el titulo del libro que desee eliminar: ";
+                std::cin >> terminoBusqueda;
+                functions.deleteBook(terminoBusqueda, archivoBiblio);
                 break;
             }
             case 4: {
-                bookList.displayBooks();
+                functions.displayBooks();
                 break;
             }
             case 5: {
-                std::cout << "Exiting the Library System. Thank you!\n";
+                std::cout << "Gracias por utilizar nuestro servicio" << std::endl;
+                archivoBiblio.close();
                 break;
             }
             default: {
-                std::cout << "Invalid choice. Please enter a number between 1 and 5.\n";
+                std::cout << "Opción inválida, por favor seleccione un número del 1 al 5\n";
             }
         }
-    } while (choice != 5);
-    
-    
+    } while (opcion != 5);
     return 0;
 }
