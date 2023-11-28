@@ -6,13 +6,21 @@ La estructura lineal seleccionada es un queue, ya que, debido a que debido a su 
 ## Selecciona un algoritmo de ordenamiento adecuado al problema y lo usa correctamente.
 El algoritmo utilizado para ordenar los libros por orden alfabético ascendente es un merge sort, pues es uno de los algoritmos de ordenamiento más consistentes (su rendimiento es 0 (n log(n)) para los casos peor, promedio y mejor). No se utilizó un heap sort porque, si bien es cierto que su rendimiento de espacio en el peor caso (0(1)) es más eficiente que el de un merge sort (0(n)), un merge sort tiene un comportamiento predecible, además de que es más fácil de implementar y entender.
 # SICT0301B: Evalúa los componentes
-## Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes
-### ordenamiento de libros
+### Hace un análisis de complejidad correcto y completo para los algoritmos de ordenamiento usados en el programa.
+#### ordenamiento de libros
 ordenamiento con merge sort: 0(n log(n)), puesto que divide la lista en mitades de manera recursiva para después combinarlas de nuevo una por una.
-### funciones para libros
+#### Hace un análisis de complejidad correcto y completo todas las estructuras de datos y cada uno de sus usos en el programa
+### funciones de queues (Clase QueueList de Queue)
+Función enqueue: 0(1), debido a que agrega un elemento al final del queue; ya tiene la posición en la que el elemento debe ir.
+
+Función dequeue: 0(1), puesto que elimina el elemento al frente (inicio) del queue; la ubicación ya está definida.
+
+Función front: 0(1), ya que únicamente devuelve una referencia al primer elemento del queue.
+#### Hace un análisis de complejidad correcto y completo para todos los demás componentes del programa y determina la complejidad final del programa.
+### funciones para libros (Clase Functions)
 Función para agregar libro: 0(n), puesto que el sistema almacena cada libro inmediatamente después de ingresarlo.
 
-Función para buscar libro: 0(n), porque recorre los elementos de los queues uno por uno.
+Función para buscar libro: 0(n), porque recorre los elementos de los queues uno después del otro.
 
 Función para eliminar libro: 0(n), debido a que revisa cada elemento en el queue de títulos.
 
@@ -20,10 +28,13 @@ Función para consultar libros: 0(n log n), ya que se compone principalmente por
 
 Función para leer archivo de libros: 0(n); el algoritmo se desplaza de línea en línea.
 
+Como el merge sort es el componente que tiene más peso sobre todo el programa, la complejidad final de este proyecto es de 0(n log n).
+
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
-El programa tiene la opción de buscar un libro (opción 3 en el menú) en el archivo txt o una serie de libros por medio de su número de serie en el AVL (opción 4 en el menú). También despliega los libros disponibles en cualquier momento (opción 7 del menú).
+El programa tiene la opción de buscar cualquier elemento de un libro (opción 2 en el menú) en el queue que corresponda al criterio ingresado. 
+También despliega los títulos de libros disponibles, ordenados alfabéticamente (opción 7 del menú).
 ## Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa.
-Los libros están registrados en el archivo libros.txt de donde se leen al iniciar el programa. Cada línea contiene los siguientes elementos (en orden): Número de serie, título, autor y año.
+Los libros están registrados en el archivo libros.txt de donde se leen al iniciar el programa. Cada línea contiene los siguientes elementos (en orden): Número de serie, título, autor y año, todos los cuales provienen de sus queues correspondientes.
 ## Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa.
-Los libros agregadas se guardan en el archivo libros.txt, con la función add del AVL; los libros se eliminan del archivo con la función remove del AVL. El ofstream tiene la sección "std::ios::app" para que el archivo se actualice por cada vez que se realicen estas operaciones (no se reescriben libros).
+En la función para agregar libros, también se escriben los elementos agregados al archivo txt.
