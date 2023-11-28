@@ -1,2 +1,0 @@
-5,HarryPotter,JKRowling,2009
-18,PercyJackson,RickRiordan,2014
