@@ -1,0 +1,6 @@
+45,PercyJackson,RickRiordan,2016
+34,HarryPotter,JKRowling,2012
+58,Narnia,CSLewis,2017
+62,ElCorazonDelatador,EdgarAllanPoe,2014
+46,PercyJacksonElLadronDelRayo,RickRiordan,2016
+59,NarniaElLeonLaBrujaYElRopero,CSLewis,2017
