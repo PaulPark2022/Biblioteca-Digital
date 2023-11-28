@@ -2,19 +2,23 @@
 Este proyecto simula el comportamiento de una plataforma de biblioteca digital con un menú que ejecuta una de estas 7 funciones: Agregar un libro, agregar una serie de libros, buscar un libro, buscar una serie de libros, quitar un libro, quitar una serie de libros. Los datos de cada libro están almacenados en un archivo de texto actualizable.
 # SICT0302B: Toma decisiones
 ## Selecciona una estructura de datos adecuada al problema y lo usa correctamente.
-La estructura seleccionada es una lista ligada, ya que el conjunto de datos planteado para este proyecto es considerable pequeño y simple, además de que las funciones que más se van a utilizar son las de agregar y quitar libros, operaciones que se pueden realizar al inicio o final de la lista. Otra ventaja es el uso de la memoria; la lista ligada únicamente tiene los valores de los libros y sus referencias.
-## Selecciona un algoritmo de ordenamiento adecuado al problema
-El algoritmo utilizado para ordenar los libros por orden alfabético ascendente es un merge sort, pues es uno de los algoritmos de ordenamiento más consistentes (su rendimiento es 0 (n log(n)) para los casos peor, promedio y mejor). No se utilizó un heap sort porque, si bien es cierto que su rendimiento de espacio en el peor caso (0(1)) es más eficiente que el de un merge sort (0(n)), un heap sort genera un árbol con los elementos para ordenarlos, una operación que ya está contemplada en el programa (copia los elementos de un AVL y los ordena).
+La estructura lineal seleccionada es un queue, ya que, debido a que debido a su comportamiento FOFI (First In, First Out), permite almacenar, buscar, eliminar y desplegar los elementos (libros, en este caso) en el orden en el que fueron agregados y seleccionados. Es debido a este orden que no se necesitan los índices de los elementos y, por lo tanto, no se utilizó una lista para el problema. Además, su funcionamiento beneficia las operaciones de lectura y escritura de archivos.
+## Selecciona un algoritmo de ordenamiento adecuado al problema y lo usa correctamente.
+El algoritmo utilizado para ordenar los libros por orden alfabético ascendente es un merge sort, pues es uno de los algoritmos de ordenamiento más consistentes (su rendimiento es 0 (n log(n)) para los casos peor, promedio y mejor). No se utilizó un heap sort porque, si bien es cierto que su rendimiento de espacio en el peor caso (0(1)) es más eficiente que el de un merge sort (0(n)), un merge sort tiene un comportamiento predecible, además de que es más fácil de implementar y entender.
 # SICT0301B: Evalúa los componentes
 ## Hace un análisis de complejidad correcto y completo para todo el programa y sus componentes
 ### ordenamiento de libros
 ordenamiento con merge sort: 0(n log(n)), puesto que divide la lista en mitades de manera recursiva para después combinarlas de nuevo una por una.
-### lista de libros
-Función para agregar libro: 0(1), puesto que el sistema ya tiene la posición predeterminada.
+### funciones para libros
+Función para agregar libro: 0(n), puesto que el sistema almacena cada libro inmediatamente después de ingresarlo.
 
-Función para eliminar libro: 0(1), debido al mismo motivo que la opción anterior.
+Función para buscar libro: 0(n), porque recorre los elementos de los queues uno por uno.
 
-Función para buscar libro: 0(n), porque recorre los elementos de la lista uno por uno.
+Función para eliminar libro: 0(n), debido a que revisa cada elemento en el queue de títulos.
+
+Función para consultar libros: 0(n log n), ya que se compone principalmente por el merge sort.
+
+Función para leer archivo de libros: 0(n); el algoritmo se desplaza de línea en línea.
 
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
