@@ -33,8 +33,8 @@ Como la función searchBook es la que más se va a utilizar (búsquedas frecuent
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
 El programa tiene la opción de buscar cualquier elemento de un libro (opción 2 en el menú) en el queue que corresponda al criterio ingresado. 
-También despliega los títulos de libros disponibles, ordenados alfabéticamente (opción 7 del menú).
+También despliega los títulos de libros disponibles, ordenados alfabéticamente (opción 4 del menú).
 ## Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa.
-Los libros están registrados en el archivo libros.txt de donde se leen al iniciar el programa. Cada línea contiene los siguientes elementos (en orden): Número de serie, título, autor y año, todos los cuales provienen de sus queues correspondientes.
+Los libros están registrados en el archivo libros.txt, de donde se leen al iniciar el programa. Cada línea contiene los siguientes elementos (en orden): Número de serie, título, autor y año, todos los cuales provienen de sus queues correspondientes.
 ## Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa.
 En la función para agregar libros, también se escriben los elementos agregados al archivo txt.
