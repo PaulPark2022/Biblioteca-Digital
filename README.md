@@ -28,7 +28,7 @@ Función para consultar libros: 0(n log n), ya que se compone principalmente por
 
 Función para leer archivo de libros: 0(n); el algoritmo se desplaza de línea en línea.
 
-Como el merge sort es el componente que tiene más peso sobre todo el programa, la complejidad final de este proyecto es de 0(n log n).
+Como la función searchBook es la que más se va a utilizar (búsquedas frecuentes), la complejidad final de este proyecto es de 0(n).
 
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
