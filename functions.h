@@ -69,7 +69,6 @@ void Merge<T>::mergeSplit(std::vector<T> &A, std::vector<T> &B, int low, int hig
 	copyArray(A, B, low, high);
 }
 
-// 0(n log (n))
 template <class T>
 std::vector<T> Merge<T>::mergeSort(const std::vector<T> &source) {
 	std::vector<T> v(source);
