@@ -28,7 +28,7 @@ Función para consultar libros: 0(n log n), ya que se compone principalmente por
 
 Función para leer archivo de libros: 0(n); el algoritmo se desplaza de línea en línea.
 
-Como la función searchBook es la que más se va a utilizar (búsquedas frecuentes), la complejidad final de este proyecto es de 0(n).
+main.cpp: 0(n+m+k), donde n es el tamaño del archivo de libros, m es el número de libros agregados y k es el número de libros disponibles.
 
 # SICT0303B: Implementa acciones científicas
 ## Implementa mecanismos para consultar información de las estructuras correctos y útiles dentro de un programa.
