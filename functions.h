@@ -121,6 +121,8 @@ void Functions::addBooks(std::ofstream& archivoOutput) {
 }
 
 void Functions::searchBooks(const std::string& terminoBusqueda, const std::string& criterioBusqueda) {
+    std::vector<size_t> indices;
+    
     if (criterioBusqueda == "titulo") {
         std::vector<std::string> vectorTitulos(titulos.begin(), titulos.end());
         auto it = std::find(vectorTitulos.begin(), vectorTitulos.end(), terminoBusqueda);
@@ -134,28 +136,34 @@ void Functions::searchBooks(const std::string& terminoBusqueda, const std::strin
         std::vector<std::string> vectorAutores(autores.begin(), autores.end());
         auto it = std::find(vectorAutores.begin(), vectorAutores.end(), terminoBusqueda);
 
-        if (it != vectorAutores.end()) {
+        while (it != vectorAutores.end()) {
             size_t index = std::distance(vectorAutores.begin(), it);
 
             auto tituloIt = titulos.begin();
             std::advance(tituloIt, index);
 
             std::cout << "Libro encontrado: " << *tituloIt << std::endl;
-        } else {
+
+            it = std::find(it + 1, vectorAutores.end(), terminoBusqueda);
+        } if (it == vectorAutores.end()) {
             std::cout << "Libro no encontrado." << std::endl;
         }
     } else if (criterioBusqueda == "anio") {
         int anioABuscar = std::stoi(terminoBusqueda);
-        auto it = std::find(anios.begin(), anios.end(), anioABuscar);
+    
+        auto itAnios = anios.begin();
+        auto itTitulos = titulos.begin();
 
-        if (it != anios.end()) {
-            size_t index = std::distance(anios.begin(), it);
+        while (itAnios != anios.end()) {
+            if (*itAnios == anioABuscar) {
+                std::cout << "Libro encontrado: " << *itTitulos << std::endl;
+            }
 
-            auto tituloIt = titulos.begin();
-            std::advance(tituloIt, index);
+            ++itAnios;
+            ++itTitulos;
+        }
 
-            std::cout << "Libro encontrado: " << *tituloIt << std::endl;
-        } else {
+        if (std::none_of(anios.begin(), anios.end(), [anioABuscar](int anio) { return anio == anioABuscar; })) {
             std::cout << "Libro no encontrado." << std::endl;
         }
     } else if (criterioBusqueda == "nSerial") {
