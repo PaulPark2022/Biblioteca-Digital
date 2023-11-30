@@ -37,4 +37,4 @@ También despliega los títulos de libros disponibles, ordenados alfabéticament
 ## Implementa mecanismos de lectura de archivos correctos y útiles dentro de un programa.
 Los libros están registrados en el archivo libros.txt, de donde se leen al iniciar el programa. Cada línea contiene los siguientes elementos (en orden): Número de serie, título, autor y año, todos los cuales provienen de sus queues correspondientes.
 ## Implementa mecanismos de escritura de archivos correctos y útiles dentro de un programa.
-En la función para agregar libros, también se escriben los elementos agregados al archivo txt.
+En la función para agregar libros (opción 1 en el menú), también se escriben los elementos agregados al archivo txt.
