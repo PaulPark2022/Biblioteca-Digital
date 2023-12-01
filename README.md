@@ -9,14 +9,14 @@ El algoritmo utilizado para ordenar los libros por orden alfabético ascendente 
 ### Hace un análisis de complejidad correcto y completo para los algoritmos de ordenamiento usados en el programa.
 #### ordenamiento de libros
 ordenamiento con merge sort: 0(n log(n)), puesto que divide la lista en mitades de manera recursiva para después combinarlas de nuevo una por una.
-#### Hace un análisis de complejidad correcto y completo todas las estructuras de datos y cada uno de sus usos en el programa
+### Hace un análisis de complejidad correcto y completo todas las estructuras de datos y cada uno de sus usos en el programa
 ### funciones de queues (Clase QueueList de Queue)
 Función enqueue: 0(1), debido a que agrega un elemento al final del queue; ya tiene la posición en la que el elemento debe ir.
 
 Función dequeue: 0(1), puesto que elimina el elemento al frente (inicio) del queue; la ubicación ya está definida.
 
 Función front: 0(1), ya que únicamente devuelve una referencia al primer elemento del queue.
-#### Hace un análisis de complejidad correcto y completo para todos los demás componentes del programa y determina la complejidad final del programa.
+### Hace un análisis de complejidad correcto y completo para todos los demás componentes del programa y determina la complejidad final del programa.
 ### funciones para libros (Clase Functions)
 Función para agregar libro: 0(n), puesto que el sistema almacena cada libro inmediatamente después de ingresarlo.
 
